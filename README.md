@@ -14,6 +14,8 @@ So, why go through the exercise? Several reasons:
 * I wanted to learn by doing it mostly from scratch
 * I wanted to use Golang's core library as much as possible. In other words, the least number of third-party dependencies.
 
+This is still a work in progress. I am still polishing the example.
+
 
 
 
