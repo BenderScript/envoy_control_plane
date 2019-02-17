@@ -1,0 +1,20 @@
+version: '2'
+services:
+
+  envoy_control_plane:
+    build:
+      context: .
+      dockerfile: Dockerfile-frontenvoy
+    volumes:
+      - ./bootstrap-ads.yaml:/etc/bootstrap-ads.yaml
+    networks:
+      - envoymesh
+    expose:
+      - "10000"
+      - "19000"
+    ports:
+      - "10000:10000"
+      - "19000:19000"
+
+networks:
+  envoymesh: {}
