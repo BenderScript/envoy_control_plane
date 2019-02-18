@@ -24,7 +24,8 @@ static_resources:
     - connect_timeout: 1s
       hosts:
         - socket_address:
-            address: 0.0.0.0
+            address: "host.docker.internal"
             port_value: 18000
       http2_protocol_options: {}
       name: xds_cluster
+      type: STRICT_DNS
