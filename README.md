@@ -17,11 +17,20 @@ So, why go through the exercise? Several reasons:
 
 This is still a work in progress. I am still polishing the example.
 
+## Environment
+
+This was tested on MacOS Mojave 10.14.3, go1.11.5 darwin/amd64, envoy latest (02/19/19)
+
 ## Topology Details
 
 One of the challenges in this exercise was to have the Envoy Proxy run as a container and the application natively. It is not straightforward to have a container access an application running on the host. It took me a while but I finally managed to get the right envoy configuration.
 
 I wanted to have the control plane running natively on the host because I wanted to tinker with it: change, step debug, rerun, stop, Printf, etc. 
+
+I had to use two main tricks to have this working:
+
+* use ["host.docker.internal"](https://docs.docker.com/docker-for-mac/networking/) as control plane address
+* set the cluster type as type: STRICT_DNS
 
 
 
