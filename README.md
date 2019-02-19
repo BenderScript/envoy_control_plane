@@ -19,7 +19,7 @@ This is still a work in progress. I am still polishing the example.
 
 ## Environment
 
-This was tested on MacOS Mojave 10.14.3, go1.11.5 darwin/amd64, envoy latest (02/19/19)
+This was tested on MacOS Mojave 10.14.3, go1.11.5 darwin/amd64, envoy v1.9.0
 
 ## Topology Details
 
