@@ -1,5 +1,6 @@
 # Envoy control plane Example
 
+![Topology](envoy_control_plane.jpg)
 
 I wanted to understand in detail how the Envoy control plane worked. I found great articles to get me going, specially this one: [Envoy hello World](https://medium.com/@salmaan.rashid/envoy-control-plane-hello-world-2f49b2865f29I)
 
@@ -15,6 +16,12 @@ So, why go through the exercise? Several reasons:
 * I wanted to use Golang's core library as much as possible. In other words, the least number of third-party dependencies.
 
 This is still a work in progress. I am still polishing the example.
+
+## Topology Details
+
+One of the challenges in this exercise was to have the Envoy Proxy run as a container and the application natively. It is not straightforward to have a container access an application running on the host. It took me a while but I finally managed to get the right envoy configuration.
+
+I wanted to have the control plane running natively on the host because I wanted to tinker with it: change, step debug, rerun, stop, Printf, etc. 
 
 
 
