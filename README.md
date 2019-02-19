@@ -1,6 +1,6 @@
 # Envoy control plane Example
 
-![Topology](envoy_control_plane.jpg)
+![Topology](images/envoy_control_plane.jpg)
 
 I wanted to understand in detail how the Envoy control plane worked. I found great articles to get me going, specially this one: [Envoy hello World](https://medium.com/@salmaan.rashid/envoy-control-plane-hello-world-2f49b2865f29I)
 
