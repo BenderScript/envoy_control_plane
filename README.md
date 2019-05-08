@@ -4,9 +4,8 @@
 
 This repository represents my experiments while trying to understand in detail how the Envoy control plane worked. As compared to envoy proxy proper there isn't a lot of detailed HOW-TOs on the control plane, but fortunately I found a few good references, specially this one: [Envoy hello World](https://medium.com/@salmaan.rashid/envoy-control-plane-hello-world-2f49b2865f29)
 
-As far code examples, there are two gems that provide great building blocks:
+As far code examples, there is one gem that provide great building blocks:
 
-* [Istio's Envoy Proxy Server testing code](https://github.com/istio/istio/blob/master/vendor/github.com/envoyproxy/go-control-plane/pkg/test/server.go)
 * [Envoy's Server Testing package](https://github.com/envoyproxy/go-control-plane/blob/master/pkg/test/server.go),   
 
 So, why go through this exercise? Several reasons:
