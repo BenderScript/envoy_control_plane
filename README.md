@@ -35,6 +35,29 @@ I had to use two main tricks to have this working:
 * use ["host.docker.internal"](https://docs.docker.com/docker-for-mac/networking/) as control plane address
 * set the cluster type as type: STRICT_DNS
 
+## Running the example
+
+Assuming you have docker installed and all the other basic stuff, everything you need to run the example should be under [testdata](https://github.com/repenno/envoy_control_plane/tree/master/testdata). 
+
+Run:
+
+```
+./build_all.sh
+```
+
+If everything goes well, you should see the following docker images and a running container
+
+```
+REPOSITORY                         TAG                 IMAGE ID            CREATED              SIZE
+envoy_control_plane                v1.9.0              d21d40d3f20a        About a minute ago   189MB
+envoyproxy/envoy                   v1.9.0              b02c1418b106        4 months ago         164MB
+
+
+CONTAINER ID        IMAGE                        COMMAND                  CREATED             STATUS              PORTS                                                NAMES
+fb862e600bb0        envoy_control_plane:v1.9.0   "/usr/bin/dumb-init …"   2 minutes ago       Up 2 minutes        0.0.0.0:10000->10000/tcp, 0.0.0.0:19000->19000/tcp   envoy_1_9_0
+```
+
+
 
 
 
