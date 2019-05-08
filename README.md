@@ -2,7 +2,7 @@
 
 ![Topology](images/envoy_control_plane.jpg)
 
-This repository represents my experiments while trying to understand in detail how the Envoy control plane worked. As compared to envoy proxy proper there isn't a lot of detailed HOW-TOs on the control plane, but fortunately I found a few good references, specially this one: [Envoy hello World](https://medium.com/@salmaan.rashid/envoy-control-plane-hello-world-2f49b2865f29I)
+This repository represents my experiments while trying to understand in detail how the Envoy control plane worked. As compared to envoy proxy proper there isn't a lot of detailed HOW-TOs on the control plane, but fortunately I found a few good references, specially this one: [Envoy hello World](https://medium.com/@salmaan.rashid/envoy-control-plane-hello-world-2f49b2865f29)
 
 As far code examples, there are two gems that provide great building blocks:
 
