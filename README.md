@@ -4,9 +4,13 @@
 
 This repository represents my experiments while trying to understand in detail how the Envoy control plane worked. As compared to envoy proxy proper there isn't a lot of detailed HOW-TOs on the control plane, but fortunately I found a few good references, specially this one: [Envoy hello World](https://medium.com/@salmaan.rashid/envoy-control-plane-hello-world-2f49b2865f29)
 
-As far code examples, there is one gem that provide great building blocks:
+As far code examples, there a few gems that provide great building blocks:
 
-* [Envoy's Server Testing package](https://github.com/envoyproxy/go-control-plane/blob/master/pkg/test/server.go),   
+* [Envoy's Testing Server Main](https://github.com/envoyproxy/go-control-plane/blob/master/pkg/test/main/main.go). This file contains the main() function.
+* [Envoy's Testing Server Startup Functions](https://github.com/envoyproxy/go-control-plane/blob/master/pkg/test/server.go). This file contains the start up functions for the various server.
+* [High Level Envoy API](https://github.com/envoyproxy/go-control-plane/blob/master/pkg/test/resource/resource.go). This file contains high-level APIs to create Envoy resources such as clusters, endpoints and routes.
+
+
 
 So, why go through this exercise? Several reasons:
 
@@ -56,6 +60,7 @@ envoyproxy/envoy                   v1.9.0              b02c1418b106        4 mon
 CONTAINER ID        IMAGE                        COMMAND                  CREATED             STATUS              PORTS                                                NAMES
 fb862e600bb0        envoy_control_plane:v1.9.0   "/usr/bin/dumb-init …"   2 minutes ago       Up 2 minutes        0.0.0.0:10000->10000/tcp, 0.0.0.0:19000->19000/tcp   envoy_1_9_0
 ```
+
 
 
 

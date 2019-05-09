@@ -31,14 +31,12 @@ import (
 )
 
 var (
-	debug       bool
-	onlyLogging bool
+	debug bool
 
 	localhost = "127.0.0.1"
 
 	port        uint
 	gatewayPort uint
-	alsPort     uint
 
 	mode string
 
@@ -57,6 +55,10 @@ const (
 	Rest       = "rest"
 )
 
+type trace struct {
+	function string
+}
+
 func init() {
 	Info = log.New(os.Stdout,
 		"INFO: ",
@@ -68,7 +70,6 @@ func init() {
 		"FATAL: ",
 		log.LstdFlags)
 	flag.BoolVar(&debug, "debug", true, "Use debug logging")
-	flag.BoolVar(&onlyLogging, "onlyLogging", false, "Only demo AccessLogging Service")
 	flag.UintVar(&port, "port", 18000, "Management server port")
 	flag.UintVar(&gatewayPort, "gateway", 19001, "Management server port for HTTP gateway")
 	flag.StringVar(&mode, "ads", Ads, "Management server type (ads, xds, rest)")
@@ -89,14 +90,23 @@ func (cb *callbacks) Report() {
 	Info.Printf("fetches: %d, requests: %d", cb.fetches, cb.requests)
 }
 func (cb *callbacks) OnStreamOpen(_ context.Context, id int64, typ string) error {
+	// type URL (or "" for ADS)
+	if typ == "" {
+		typ = "ADS"
+	}
 	Info.Printf("OnStreamOpen %d open for %s", id, typ)
 	return nil
 }
 func (cb *callbacks) OnStreamClosed(id int64) {
 	Info.Printf("OnStreamClosed %d closed", id)
 }
-func (cb *callbacks) OnStreamRequest(int64, *v2.DiscoveryRequest) error {
+func (cb *callbacks) OnStreamRequest(unknown int64, discoveryReq *v2.DiscoveryRequest) error {
 	Info.Println("OnStreamRequest")
+	Info.Printf("Version: %s \n", discoveryReq.VersionInfo)
+	Info.Printf("Discovery Request TypeURL: %s \n", discoveryReq.TypeUrl)
+	Info.Printf("Discovery Request Node Id: %s \n", discoveryReq.Node.Id)
+	Info.Printf("Discovery Request: %s \n", discoveryReq.String())
+	Info.Println(unknown)
 	cb.mu.Lock()
 	defer cb.mu.Unlock()
 	cb.requests++
@@ -106,12 +116,19 @@ func (cb *callbacks) OnStreamRequest(int64, *v2.DiscoveryRequest) error {
 	}
 	return nil
 }
-func (cb *callbacks) OnStreamResponse(int64, *v2.DiscoveryRequest, *v2.DiscoveryResponse) {
+func (cb *callbacks) OnStreamResponse(unknown int64, discoveryReq *v2.DiscoveryRequest, discoveryResp *v2.DiscoveryResponse) {
 	Info.Println("OnStreamResponse...")
+	Info.Printf("Discovery Request TypeURL: %s \n", discoveryReq.TypeUrl)
+	Info.Printf("Discovery Request Node Id: %s \n", discoveryReq.Node.Id)
+	Info.Printf("Discovery Request TypeURL: %s \n", discoveryResp.TypeUrl)
+	Info.Printf("Discovery Response: %s \n", discoveryResp.String())
+	Info.Println(unknown)
 	cb.Report()
 }
-func (cb *callbacks) OnFetchRequest(_ context.Context, req *v2.DiscoveryRequest) error {
+func (cb *callbacks) OnFetchRequest(_ context.Context, discoveryReq *v2.DiscoveryRequest) error {
 	Info.Println("OnFetchRequest...")
+	Info.Printf("Discovery Response TypeURL: %s \n", discoveryReq.TypeUrl)
+	Info.Printf("Discovery Request: %s \n", discoveryReq.String())
 	cb.mu.Lock()
 	defer cb.mu.Unlock()
 	cb.fetches++
@@ -122,10 +139,12 @@ func (cb *callbacks) OnFetchRequest(_ context.Context, req *v2.DiscoveryRequest)
 	return nil
 }
 
-func (cb *callbacks) OnFetchResponse(*v2.DiscoveryRequest, *v2.DiscoveryResponse) {}
+func (cb *callbacks) OnFetchResponse(*v2.DiscoveryRequest, *v2.DiscoveryResponse) {
+	Info.Println("OnFetchResponse")
+}
 
 type callbacks struct {
-	signal        chan struct{}
+	signal        chan trace
 	fetches       int
 	requests      int
 	mu            sync.Mutex
@@ -148,6 +167,12 @@ const grpcMaxConcurrentStreams = 1000000
 
 // RunManagementServer starts an xDS server at the given port.
 func RunManagementServer(ctx context.Context, server xds.Server, port uint) {
+
+	Info.Printf("starting Management Server  on port %d", port)
+	// gRPC golang library sets a very small upper bound for the number gRPC/h2
+	// streams over a single TCP connection. If a proxy multiplexes requests over
+	// a single connection to the management server, then it might lead to
+	// availability problems.
 	var grpcOptions []grpc.ServerOption
 	grpcOptions = append(grpcOptions, grpc.MaxConcurrentStreams(grpcMaxConcurrentStreams))
 	grpcServer := grpc.NewServer(grpcOptions...)
@@ -195,9 +220,9 @@ func main() {
 	flag.Parse()
 	ctx := context.Background()
 
-	Info.Println("Starting control plane")
+	Info.Println("==== Starting Envoy Control Plane ====")
 
-	signal := make(chan struct{})
+	signal := make(chan trace)
 	cb := &callbacks{
 		signal:   signal,
 		fetches:  0,
@@ -205,13 +230,8 @@ func main() {
 	}
 	config = cache.NewSnapshotCache(mode == Ads, Hasher{}, logger{})
 
+	// We pass our implementation of the control plane callback interface
 	srv := xds.NewServer(config, cb)
-
-	if onlyLogging {
-		cc := make(chan struct{})
-		<-cc
-		os.Exit(0)
-	}
 
 	// start the xDS server
 	go RunManagementServer(ctx, srv, port)
@@ -224,7 +244,8 @@ func main() {
 
 	for {
 		atomic.AddInt32(&version, 1)
-		nodeId := config.GetStatusKeys()[1]
+		nodeIds := config.GetStatusKeys()
+		nodeId := nodeIds[0]
 
 		var clusterName = "service_bbc"
 		var remoteHost = "www.bbc.com"
@@ -245,12 +266,14 @@ func main() {
 
 		c := []cache.Resource{
 			&v2.Cluster{
-				Name:            clusterName,
-				ConnectTimeout:  2 * time.Second,
-				Type:            v2.Cluster_LOGICAL_DNS,
-				DnsLookupFamily: v2.Cluster_V4_ONLY,
-				LbPolicy:        v2.Cluster_ROUND_ROBIN,
-				Hosts:           []*core.Address{h},
+				Name:           clusterName,
+				ConnectTimeout: 2 * time.Second,
+				// API change
+				// ClusterDiscoveryType:            v2.Cluster_LOGICAL_DNS,
+				ClusterDiscoveryType: &v2.Cluster_Type{Type: v2.Cluster_LOGICAL_DNS},
+				DnsLookupFamily:      v2.Cluster_V4_ONLY,
+				LbPolicy:             v2.Cluster_ROUND_ROBIN,
+				Hosts:                []*core.Address{h},
 				TlsContext: &auth.UpstreamTlsContext{
 					Sni: sni,
 				},
