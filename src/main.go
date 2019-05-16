@@ -100,29 +100,47 @@ func (cb *callbacks) OnStreamOpen(_ context.Context, id int64, typ string) error
 func (cb *callbacks) OnStreamClosed(id int64) {
 	Info.Printf("OnStreamClosed %d closed", id)
 }
-func (cb *callbacks) OnStreamRequest(unknown int64, discoveryReq *v2.DiscoveryRequest) error {
+func (cb *callbacks) OnStreamRequest(streamId int64, discoveryReq *v2.DiscoveryRequest) error {
+	var version string
 	Info.Println("OnStreamRequest")
-	Info.Printf("Version: %s \n", discoveryReq.VersionInfo)
+	if discoveryReq.VersionInfo == "" {
+		version = "No version: initial Request"
+	} else {
+		version = discoveryReq.VersionInfo
+	}
+	Info.Printf("Version: %s \n", version)
 	Info.Printf("Discovery Request TypeURL: %s \n", discoveryReq.TypeUrl)
 	Info.Printf("Discovery Request Node Id: %s \n", discoveryReq.Node.Id)
 	Info.Printf("Discovery Request: %s \n", discoveryReq.String())
-	Info.Println(unknown)
+	Info.Printf("Stream Id: %d \n", streamId)
 	cb.mu.Lock()
 	defer cb.mu.Unlock()
 	cb.requests++
 	if cb.signal != nil {
+		Info.Println("Closing channel...")
 		close(cb.signal)
 		cb.signal = nil
 	}
 	return nil
 }
-func (cb *callbacks) OnStreamResponse(unknown int64, discoveryReq *v2.DiscoveryRequest, discoveryResp *v2.DiscoveryResponse) {
+func (cb *callbacks) OnStreamResponse(streamId int64, discoveryReq *v2.DiscoveryRequest, discoveryResp *v2.DiscoveryResponse) {
+
 	Info.Println("OnStreamResponse...")
+	reqVersion := discoveryReq.VersionInfo
+	respVersion := discoveryResp.VersionInfo
+	if discoveryReq.VersionInfo == "" {
+		reqVersion = "No version: initial Request"
+	}
+	if discoveryResp.VersionInfo == "" {
+		respVersion = "No version: initial Request"
+	}
+	Info.Printf("Resp Version: %s \n", respVersion)
+	Info.Printf("Req Version: %s \n", reqVersion)
 	Info.Printf("Discovery Request TypeURL: %s \n", discoveryReq.TypeUrl)
 	Info.Printf("Discovery Request Node Id: %s \n", discoveryReq.Node.Id)
-	Info.Printf("Discovery Request TypeURL: %s \n", discoveryResp.TypeUrl)
+	Info.Printf("Discovery Response TypeURL: %s \n", discoveryResp.TypeUrl)
+	Info.Printf("Stream Id: %d \n", streamId)
 	Info.Printf("Discovery Response: %s \n", discoveryResp.String())
-	Info.Println(unknown)
 	cb.Report()
 }
 func (cb *callbacks) OnFetchRequest(_ context.Context, discoveryReq *v2.DiscoveryRequest) error {
@@ -133,6 +151,7 @@ func (cb *callbacks) OnFetchRequest(_ context.Context, discoveryReq *v2.Discover
 	defer cb.mu.Unlock()
 	cb.fetches++
 	if cb.signal != nil {
+		Info.Println("Closing channel...")
 		close(cb.signal)
 		cb.signal = nil
 	}
@@ -238,7 +257,8 @@ func main() {
 	go RunManagementGateway(ctx, srv, gatewayPort)
 
 	Info.Println("waiting for the first request...")
-	<-signal
+	_, more := <-signal
+	Info.Printf("Main received more on channel :%v", more)
 
 	cb.Report()
 

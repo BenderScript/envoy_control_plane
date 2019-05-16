@@ -5,4 +5,4 @@ FROM envoyproxy/envoy:v1.9.0
 # FROM envoyproxy/envoy:latest
 RUN apt-get update
 # COPY bootstrap-ads.yaml /etc/bootstrap-ads.yaml
-CMD /usr/local/bin/envoy -c /etc/bootstrap-ads.yaml
+CMD /usr/local/bin/envoy -c /etc/bootstrap-ads.yaml --log-level debug

@@ -1,15 +1,18 @@
 # Base config for an ADS management server on 18000, admin port on 19000
 # From https://github.com/envoyproxy/go-control-plane/blob/master/sample/bootstrap-ads.yaml
 admin:
+  # (config.bootstrap.v2.Admin) Configuration for the local administration HTTP server.
   access_log_path: /dev/null
   address:
     socket_address:
       address: 0.0.0.0
       port_value: 19000
 dynamic_resources:
+  # (core.ApiConfigSource) A single ADS source may be optionally specified. This must have api_type GRPC. Only ConfigSources that have the ads field set will be streamed on the ADS channel.
   ads_config:
     api_type: GRPC
     grpc_services:
+    # https://www.envoyproxy.io/docs/envoy/latest/api-v2/api/v2/core/grpc_service.proto#envoy-api-msg-core-grpcservice
       - envoy_grpc:
           cluster_name: xds_cluster
   cds_config:
@@ -20,6 +23,7 @@ node:
   cluster: test-cluster
   id: test-id
 static_resources:
+#  (Cluster) If a network based configuration source is specified for cds_config, it’s necessary to have some initial cluster definitions available to allow Envoy to know how to speak to the management server. These cluster definitions may not use EDS (i.e. they should be static IP or DNS-based).
   clusters:
     - connect_timeout: 1s
       hosts:

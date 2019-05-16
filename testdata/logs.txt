@@ -1,0 +1,465 @@
+Step 1/3 : FROM envoyproxy/envoy:v1.9.0
+ ---> b02c1418b106
+Step 2/3 : RUN apt-get update
+ ---> Using cache
+ ---> a1f5e253e3f7
+Step 3/3 : CMD /usr/local/bin/envoy -c /etc/bootstrap-ads.yaml --log-level debug
+ ---> Using cache
+ ---> 96bad5e25cfd
+Successfully built 96bad5e25cfd
+Successfully tagged testdata_envoy_control_plane:latest
+Attaching to testdata_envoy_control_plane_1
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:48.399][000009][info][main] [source/server/server.cc:206] initializing epoch 0 (hot restart version=10.200.16384.127.options=capacity=16384, num_slots=8209 hash=228984379728933363 size=2654312)
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:48.399][000009][info][main] [source/server/server.cc:208] statically linked extensions:
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:48.399][000009][info][main] [source/server/server.cc:210]   access_loggers: envoy.file_access_log,envoy.http_grpc_access_log
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:48.399][000009][info][main] [source/server/server.cc:213]   filters.http: envoy.buffer,envoy.cors,envoy.ext_authz,envoy.fault,envoy.filters.http.header_to_metadata,envoy.filters.http.jwt_authn,envoy.filters.http.rbac,envoy.grpc_http1_bridge,envoy.grpc_json_transcoder,envoy.grpc_web,envoy.gzip,envoy.health_check,envoy.http_dynamo_filter,envoy.ip_tagging,envoy.lua,envoy.rate_limit,envoy.router,envoy.squash
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:48.399][000009][info][main] [source/server/server.cc:216]   filters.listener: envoy.listener.original_dst,envoy.listener.proxy_protocol,envoy.listener.tls_inspector
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:48.399][000009][info][main] [source/server/server.cc:219]   filters.network: envoy.client_ssl_auth,envoy.echo,envoy.ext_authz,envoy.filters.network.dubbo_proxy,envoy.filters.network.rbac,envoy.filters.network.sni_cluster,envoy.filters.network.thrift_proxy,envoy.http_connection_manager,envoy.mongo_proxy,envoy.ratelimit,envoy.redis_proxy,envoy.tcp_proxy
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:48.399][000009][info][main] [source/server/server.cc:221]   stat_sinks: envoy.dog_statsd,envoy.metrics_service,envoy.stat_sinks.hystrix,envoy.statsd
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:48.399][000009][info][main] [source/server/server.cc:223]   tracers: envoy.dynamic.ot,envoy.lightstep,envoy.tracers.datadog,envoy.zipkin
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:48.399][000009][info][main] [source/server/server.cc:226]   transport_sockets.downstream: envoy.transport_sockets.alts,envoy.transport_sockets.capture,raw_buffer,tls
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:48.399][000009][info][main] [source/server/server.cc:229]   transport_sockets.upstream: envoy.transport_sockets.alts,envoy.transport_sockets.capture,raw_buffer,tls
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:48.409][000009][info][main] [source/server/server.cc:271] admin address: 0.0.0.0:19000
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:48.410][000009][debug][main] [source/server/overload_manager_impl.cc:171] No overload action configured for envoy.overload_actions.stop_accepting_connections.
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:48.410][000009][debug][main] [source/server/overload_manager_impl.cc:171] No overload action configured for envoy.overload_actions.stop_accepting_connections.
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:48.410][000009][debug][main] [source/server/overload_manager_impl.cc:171] No overload action configured for envoy.overload_actions.stop_accepting_connections.
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:48.410][000009][debug][main] [source/server/overload_manager_impl.cc:171] No overload action configured for envoy.overload_actions.stop_accepting_connections.
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:48.410][000009][info][config] [source/server/configuration_impl.cc:50] loading 0 static secret(s)
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:48.410][000009][info][config] [source/server/configuration_impl.cc:56] loading 1 cluster(s)
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:48.413][000013][debug][grpc] [source/common/grpc/google_async_client_impl.cc:41] completionThread running
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:48.415][000009][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:824] adding TLS initial cluster xds_cluster
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:48.415][000009][debug][upstream] [source/common/upstream/upstream_impl.cc:1237] starting async DNS resolution for host.docker.internal
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:48.416][000009][debug][upstream] [source/common/network/dns_impl.cc:158] Setting DNS resolution timer for 5000 milliseconds
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:48.416][000009][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:63] cm init: adding: cluster=xds_cluster primary=1 secondary=0
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:48.418][000009][debug][upstream] [source/common/config/grpc_mux_impl.cc:48] Establishing new gRPC bidi stream for rpc StreamAggregatedResources(stream .envoy.api.v2.DiscoveryRequest) returns (stream .envoy.api.v2.DiscoveryResponse);
+[36menvoy_control_plane_1  |[0m 
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:48.419][000009][debug][router] [source/common/router/router.cc:270] [C0][S8573079784736957114] cluster 'xds_cluster' match for URL '/envoy.service.discovery.v2.AggregatedDiscoveryService/StreamAggregatedResources'
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:48.419][000009][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:1104] no healthy host for HTTP connection pool
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:48.420][000009][debug][http] [source/common/http/async_client_impl.cc:93] async http request response headers (end_stream=true):
+[36menvoy_control_plane_1  |[0m ':status', '200'
+[36menvoy_control_plane_1  |[0m 'content-type', 'application/grpc'
+[36menvoy_control_plane_1  |[0m 'grpc-status', '14'
+[36menvoy_control_plane_1  |[0m 'grpc-message', 'no healthy upstream'
+[36menvoy_control_plane_1  |[0m 
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:48.420][000009][warning][upstream] [source/common/config/grpc_mux_impl.cc:268] gRPC config stream closed: 14, no healthy upstream
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:48.420][000009][warning][upstream] [source/common/config/grpc_mux_impl.cc:51] Unable to establish new stream
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:48.420][000009][info][config] [source/server/configuration_impl.cc:67] loading 0 listener(s)
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:48.420][000009][info][config] [source/server/configuration_impl.cc:92] loading tracing configuration
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:48.420][000009][info][config] [source/server/configuration_impl.cc:112] loading stats sink configuration
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:48.421][000009][info][main] [source/server/server.cc:463] starting main dispatch loop
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:48.421][000009][debug][upstream] [source/common/network/dns_impl.cc:158] Setting DNS resolution timer for 5000 milliseconds
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:48.422][000009][debug][upstream] [source/common/upstream/upstream_impl.cc:1244] async DNS resolution complete for host.docker.internal
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:48.423][000009][debug][upstream] [source/common/upstream/upstream_impl.cc:1266] DNS hosts have changed for host.docker.internal
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:48.423][000009][debug][upstream] [source/common/upstream/upstream_impl.cc:634] initializing secondary cluster xds_cluster completed
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:48.423][000009][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:958] membership update for TLS cluster xds_cluster added 1 removed 0
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:48.423][000009][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:91] cm init: init complete: cluster=xds_cluster primary=0 secondary=0
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:48.423][000009][info][upstream] [source/common/upstream/cluster_manager_impl.cc:132] cm init: initializing cds
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:48.423][000009][debug][upstream] [source/common/config/grpc_mux_impl.cc:137] gRPC mux subscribe for type.googleapis.com/envoy.api.v2.Cluster
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:48.423][000009][debug][upstream] [source/common/config/grpc_mux_impl.cc:89] No stream available to sendDiscoveryRequest for type.googleapis.com/envoy.api.v2.Cluster
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:49.656][000009][debug][upstream] [source/common/config/grpc_mux_impl.cc:48] Establishing new gRPC bidi stream for rpc StreamAggregatedResources(stream .envoy.api.v2.DiscoveryRequest) returns (stream .envoy.api.v2.DiscoveryResponse);
+[36menvoy_control_plane_1  |[0m 
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:49.656][000009][debug][router] [source/common/router/router.cc:270] [C0][S4619096802369175633] cluster 'xds_cluster' match for URL '/envoy.service.discovery.v2.AggregatedDiscoveryService/StreamAggregatedResources'
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:49.656][000009][debug][router] [source/common/router/router.cc:328] [C0][S4619096802369175633] router decoding headers:
+[36menvoy_control_plane_1  |[0m ':method', 'POST'
+[36menvoy_control_plane_1  |[0m ':path', '/envoy.service.discovery.v2.AggregatedDiscoveryService/StreamAggregatedResources'
+[36menvoy_control_plane_1  |[0m ':authority', 'xds_cluster'
+[36menvoy_control_plane_1  |[0m ':scheme', 'http'
+[36menvoy_control_plane_1  |[0m 'te', 'trailers'
+[36menvoy_control_plane_1  |[0m 'content-type', 'application/grpc'
+[36menvoy_control_plane_1  |[0m 'x-envoy-internal', 'true'
+[36menvoy_control_plane_1  |[0m 'x-forwarded-for', '172.18.0.2'
+[36menvoy_control_plane_1  |[0m 
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:49.656][000009][debug][client] [source/common/http/codec_client.cc:26] [C0] connecting
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:49.656][000009][debug][connection] [source/common/network/connection_impl.cc:634] [C0] connecting to 192.168.65.2:18000
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:49.656][000009][debug][connection] [source/common/network/connection_impl.cc:643] [C0] connection in progress
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:49.656][000009][debug][http2] [source/common/http/http2/codec_impl.cc:721] [C0] setting stream-level initial window size to 268435456
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:49.656][000009][debug][http2] [source/common/http/http2/codec_impl.cc:743] [C0] updating connection-level initial window size to 268435456
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:49.656][000009][debug][pool] [source/common/http/conn_pool_base.cc:20] queueing request due to no available connections
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:49.656][000009][debug][connection] [source/common/network/connection_impl.cc:525] [C0] delayed connection error: 111
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:49.656][000009][debug][connection] [source/common/network/connection_impl.cc:183] [C0] closing socket: 0
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:49.657][000009][debug][client] [source/common/http/codec_client.cc:82] [C0] disconnect. resetting 0 pending requests
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:49.657][000009][debug][pool] [source/common/http/http2/conn_pool.cc:136] [C0] client disconnected
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:49.657][000009][debug][router] [source/common/router/router.cc:481] [C0][S4619096802369175633] upstream reset
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:49.657][000009][debug][http] [source/common/http/async_client_impl.cc:93] async http request response headers (end_stream=true):
+[36menvoy_control_plane_1  |[0m ':status', '200'
+[36menvoy_control_plane_1  |[0m 'content-type', 'application/grpc'
+[36menvoy_control_plane_1  |[0m 'grpc-status', '14'
+[36menvoy_control_plane_1  |[0m 'grpc-message', 'upstream connect error or disconnect/reset before headers'
+[36menvoy_control_plane_1  |[0m 
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:49.657][000009][warning][upstream] [source/common/config/grpc_mux_impl.cc:268] gRPC config stream closed: 14, upstream connect error or disconnect/reset before headers
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:49.657][000009][debug][pool] [source/common/http/http2/conn_pool.cc:160] [C0] destroying primary client
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:51.646][000009][debug][upstream] [source/common/config/grpc_mux_impl.cc:48] Establishing new gRPC bidi stream for rpc StreamAggregatedResources(stream .envoy.api.v2.DiscoveryRequest) returns (stream .envoy.api.v2.DiscoveryResponse);
+[36menvoy_control_plane_1  |[0m 
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:51.646][000009][debug][router] [source/common/router/router.cc:270] [C0][S5626492110271393621] cluster 'xds_cluster' match for URL '/envoy.service.discovery.v2.AggregatedDiscoveryService/StreamAggregatedResources'
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:51.646][000009][debug][router] [source/common/router/router.cc:328] [C0][S5626492110271393621] router decoding headers:
+[36menvoy_control_plane_1  |[0m ':method', 'POST'
+[36menvoy_control_plane_1  |[0m ':path', '/envoy.service.discovery.v2.AggregatedDiscoveryService/StreamAggregatedResources'
+[36menvoy_control_plane_1  |[0m ':authority', 'xds_cluster'
+[36menvoy_control_plane_1  |[0m ':scheme', 'http'
+[36menvoy_control_plane_1  |[0m 'te', 'trailers'
+[36menvoy_control_plane_1  |[0m 'content-type', 'application/grpc'
+[36menvoy_control_plane_1  |[0m 'x-envoy-internal', 'true'
+[36menvoy_control_plane_1  |[0m 'x-forwarded-for', '172.18.0.2'
+[36menvoy_control_plane_1  |[0m 
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:51.647][000009][debug][client] [source/common/http/codec_client.cc:26] [C1] connecting
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:51.647][000009][debug][connection] [source/common/network/connection_impl.cc:634] [C1] connecting to 192.168.65.2:18000
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:51.647][000009][debug][connection] [source/common/network/connection_impl.cc:643] [C1] connection in progress
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:51.647][000009][debug][http2] [source/common/http/http2/codec_impl.cc:721] [C1] setting stream-level initial window size to 268435456
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:51.647][000009][debug][http2] [source/common/http/http2/codec_impl.cc:743] [C1] updating connection-level initial window size to 268435456
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:51.647][000009][debug][pool] [source/common/http/conn_pool_base.cc:20] queueing request due to no available connections
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:51.647][000009][debug][connection] [source/common/network/connection_impl.cc:525] [C1] delayed connection error: 111
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:51.647][000009][debug][connection] [source/common/network/connection_impl.cc:183] [C1] closing socket: 0
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:51.647][000009][debug][client] [source/common/http/codec_client.cc:82] [C1] disconnect. resetting 0 pending requests
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:51.647][000009][debug][pool] [source/common/http/http2/conn_pool.cc:136] [C1] client disconnected
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:51.647][000009][debug][router] [source/common/router/router.cc:481] [C0][S5626492110271393621] upstream reset
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:51.647][000009][debug][http] [source/common/http/async_client_impl.cc:93] async http request response headers (end_stream=true):
+[36menvoy_control_plane_1  |[0m ':status', '200'
+[36menvoy_control_plane_1  |[0m 'content-type', 'application/grpc'
+[36menvoy_control_plane_1  |[0m 'grpc-status', '14'
+[36menvoy_control_plane_1  |[0m 'grpc-message', 'upstream connect error or disconnect/reset before headers'
+[36menvoy_control_plane_1  |[0m 
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:51.648][000009][warning][upstream] [source/common/config/grpc_mux_impl.cc:268] gRPC config stream closed: 14, upstream connect error or disconnect/reset before headers
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:51.648][000009][debug][pool] [source/common/http/http2/conn_pool.cc:160] [C1] destroying primary client
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:53.429][000009][debug][main] [source/server/server.cc:143] flushing stats
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:53.429][000009][debug][upstream] [source/common/upstream/upstream_impl.cc:1237] starting async DNS resolution for host.docker.internal
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:53.429][000009][debug][upstream] [source/common/network/dns_impl.cc:158] Setting DNS resolution timer for 5000 milliseconds
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:53.432][000009][debug][upstream] [source/common/network/dns_impl.cc:158] Setting DNS resolution timer for 5000 milliseconds
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:53.434][000009][debug][upstream] [source/common/upstream/upstream_impl.cc:1244] async DNS resolution complete for host.docker.internal
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:54.351][000009][debug][upstream] [source/common/config/grpc_mux_impl.cc:48] Establishing new gRPC bidi stream for rpc StreamAggregatedResources(stream .envoy.api.v2.DiscoveryRequest) returns (stream .envoy.api.v2.DiscoveryResponse);
+[36menvoy_control_plane_1  |[0m 
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:54.351][000009][debug][router] [source/common/router/router.cc:270] [C0][S6580027556910839601] cluster 'xds_cluster' match for URL '/envoy.service.discovery.v2.AggregatedDiscoveryService/StreamAggregatedResources'
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:54.351][000009][debug][router] [source/common/router/router.cc:328] [C0][S6580027556910839601] router decoding headers:
+[36menvoy_control_plane_1  |[0m ':method', 'POST'
+[36menvoy_control_plane_1  |[0m ':path', '/envoy.service.discovery.v2.AggregatedDiscoveryService/StreamAggregatedResources'
+[36menvoy_control_plane_1  |[0m ':authority', 'xds_cluster'
+[36menvoy_control_plane_1  |[0m ':scheme', 'http'
+[36menvoy_control_plane_1  |[0m 'te', 'trailers'
+[36menvoy_control_plane_1  |[0m 'content-type', 'application/grpc'
+[36menvoy_control_plane_1  |[0m 'x-envoy-internal', 'true'
+[36menvoy_control_plane_1  |[0m 'x-forwarded-for', '172.18.0.2'
+[36menvoy_control_plane_1  |[0m 
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:54.351][000009][debug][client] [source/common/http/codec_client.cc:26] [C2] connecting
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:54.352][000009][debug][connection] [source/common/network/connection_impl.cc:634] [C2] connecting to 192.168.65.2:18000
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:54.352][000009][debug][connection] [source/common/network/connection_impl.cc:643] [C2] connection in progress
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:54.352][000009][debug][http2] [source/common/http/http2/codec_impl.cc:721] [C2] setting stream-level initial window size to 268435456
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:54.352][000009][debug][http2] [source/common/http/http2/codec_impl.cc:743] [C2] updating connection-level initial window size to 268435456
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:54.352][000009][debug][pool] [source/common/http/conn_pool_base.cc:20] queueing request due to no available connections
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:54.352][000009][debug][connection] [source/common/network/connection_impl.cc:525] [C2] delayed connection error: 111
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:54.352][000009][debug][connection] [source/common/network/connection_impl.cc:183] [C2] closing socket: 0
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:54.353][000009][debug][client] [source/common/http/codec_client.cc:82] [C2] disconnect. resetting 0 pending requests
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:54.353][000009][debug][pool] [source/common/http/http2/conn_pool.cc:136] [C2] client disconnected
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:54.353][000009][debug][router] [source/common/router/router.cc:481] [C0][S6580027556910839601] upstream reset
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:54.353][000009][debug][http] [source/common/http/async_client_impl.cc:93] async http request response headers (end_stream=true):
+[36menvoy_control_plane_1  |[0m ':status', '200'
+[36menvoy_control_plane_1  |[0m 'content-type', 'application/grpc'
+[36menvoy_control_plane_1  |[0m 'grpc-status', '14'
+[36menvoy_control_plane_1  |[0m 'grpc-message', 'upstream connect error or disconnect/reset before headers'
+[36menvoy_control_plane_1  |[0m 
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:54.353][000009][warning][upstream] [source/common/config/grpc_mux_impl.cc:268] gRPC config stream closed: 14, upstream connect error or disconnect/reset before headers
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:54.353][000009][debug][pool] [source/common/http/http2/conn_pool.cc:160] [C2] destroying primary client
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:58.431][000009][debug][upstream] [source/common/upstream/upstream_impl.cc:1237] starting async DNS resolution for host.docker.internal
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:58.432][000009][debug][upstream] [source/common/network/dns_impl.cc:158] Setting DNS resolution timer for 5000 milliseconds
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:58.433][000009][debug][upstream] [source/common/network/dns_impl.cc:158] Setting DNS resolution timer for 5000 milliseconds
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:35:58.435][000009][debug][upstream] [source/common/upstream/upstream_impl.cc:1244] async DNS resolution complete for host.docker.internal
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:01.890][000009][debug][upstream] [source/common/config/grpc_mux_impl.cc:48] Establishing new gRPC bidi stream for rpc StreamAggregatedResources(stream .envoy.api.v2.DiscoveryRequest) returns (stream .envoy.api.v2.DiscoveryResponse);
+[36menvoy_control_plane_1  |[0m 
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:01.890][000009][debug][router] [source/common/router/router.cc:270] [C0][S9281149175789427126] cluster 'xds_cluster' match for URL '/envoy.service.discovery.v2.AggregatedDiscoveryService/StreamAggregatedResources'
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:01.890][000009][debug][router] [source/common/router/router.cc:328] [C0][S9281149175789427126] router decoding headers:
+[36menvoy_control_plane_1  |[0m ':method', 'POST'
+[36menvoy_control_plane_1  |[0m ':path', '/envoy.service.discovery.v2.AggregatedDiscoveryService/StreamAggregatedResources'
+[36menvoy_control_plane_1  |[0m ':authority', 'xds_cluster'
+[36menvoy_control_plane_1  |[0m ':scheme', 'http'
+[36menvoy_control_plane_1  |[0m 'te', 'trailers'
+[36menvoy_control_plane_1  |[0m 'content-type', 'application/grpc'
+[36menvoy_control_plane_1  |[0m 'x-envoy-internal', 'true'
+[36menvoy_control_plane_1  |[0m 'x-forwarded-for', '172.18.0.2'
+[36menvoy_control_plane_1  |[0m 
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:01.890][000009][debug][client] [source/common/http/codec_client.cc:26] [C3] connecting
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:01.890][000009][debug][connection] [source/common/network/connection_impl.cc:634] [C3] connecting to 192.168.65.2:18000
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:01.891][000009][debug][connection] [source/common/network/connection_impl.cc:643] [C3] connection in progress
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:01.891][000009][debug][http2] [source/common/http/http2/codec_impl.cc:721] [C3] setting stream-level initial window size to 268435456
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:01.891][000009][debug][http2] [source/common/http/http2/codec_impl.cc:743] [C3] updating connection-level initial window size to 268435456
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:01.891][000009][debug][pool] [source/common/http/conn_pool_base.cc:20] queueing request due to no available connections
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:01.892][000009][debug][connection] [source/common/network/connection_impl.cc:525] [C3] delayed connection error: 111
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:01.892][000009][debug][connection] [source/common/network/connection_impl.cc:183] [C3] closing socket: 0
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:01.892][000009][debug][client] [source/common/http/codec_client.cc:82] [C3] disconnect. resetting 0 pending requests
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:01.892][000009][debug][pool] [source/common/http/http2/conn_pool.cc:136] [C3] client disconnected
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:01.892][000009][debug][router] [source/common/router/router.cc:481] [C0][S9281149175789427126] upstream reset
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:01.892][000009][debug][http] [source/common/http/async_client_impl.cc:93] async http request response headers (end_stream=true):
+[36menvoy_control_plane_1  |[0m ':status', '200'
+[36menvoy_control_plane_1  |[0m 'content-type', 'application/grpc'
+[36menvoy_control_plane_1  |[0m 'grpc-status', '14'
+[36menvoy_control_plane_1  |[0m 'grpc-message', 'upstream connect error or disconnect/reset before headers'
+[36menvoy_control_plane_1  |[0m 
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:01.892][000009][warning][upstream] [source/common/config/grpc_mux_impl.cc:268] gRPC config stream closed: 14, upstream connect error or disconnect/reset before headers
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:01.893][000009][debug][pool] [source/common/http/http2/conn_pool.cc:160] [C3] destroying primary client
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:03.434][000009][debug][upstream] [source/common/upstream/upstream_impl.cc:1237] starting async DNS resolution for host.docker.internal
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:03.435][000009][debug][upstream] [source/common/network/dns_impl.cc:158] Setting DNS resolution timer for 5000 milliseconds
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:03.439][000009][debug][upstream] [source/common/network/dns_impl.cc:158] Setting DNS resolution timer for 5000 milliseconds
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:03.442][000009][debug][upstream] [source/common/upstream/upstream_impl.cc:1244] async DNS resolution complete for host.docker.internal
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:08.440][000009][debug][upstream] [source/common/upstream/upstream_impl.cc:1237] starting async DNS resolution for host.docker.internal
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:08.441][000009][debug][upstream] [source/common/network/dns_impl.cc:158] Setting DNS resolution timer for 5000 milliseconds
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:08.442][000009][debug][upstream] [source/common/network/dns_impl.cc:158] Setting DNS resolution timer for 5000 milliseconds
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:08.444][000009][debug][upstream] [source/common/upstream/upstream_impl.cc:1244] async DNS resolution complete for host.docker.internal
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:13.446][000009][debug][upstream] [source/common/upstream/upstream_impl.cc:1237] starting async DNS resolution for host.docker.internal
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:13.446][000009][debug][upstream] [source/common/network/dns_impl.cc:158] Setting DNS resolution timer for 5000 milliseconds
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:13.449][000009][debug][upstream] [source/common/network/dns_impl.cc:158] Setting DNS resolution timer for 5000 milliseconds
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:13.451][000009][debug][upstream] [source/common/upstream/upstream_impl.cc:1244] async DNS resolution complete for host.docker.internal
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:18.418][000009][debug][upstream] [source/common/upstream/upstream_impl.cc:1237] starting async DNS resolution for host.docker.internal
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:18.419][000009][debug][upstream] [source/common/network/dns_impl.cc:158] Setting DNS resolution timer for 5000 milliseconds
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:18.422][000009][debug][upstream] [source/common/network/dns_impl.cc:158] Setting DNS resolution timer for 5000 milliseconds
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:18.424][000009][debug][upstream] [source/common/upstream/upstream_impl.cc:1244] async DNS resolution complete for host.docker.internal
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:23.426][000009][debug][upstream] [source/common/upstream/upstream_impl.cc:1237] starting async DNS resolution for host.docker.internal
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:23.427][000009][debug][upstream] [source/common/network/dns_impl.cc:158] Setting DNS resolution timer for 5000 milliseconds
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:23.429][000009][debug][upstream] [source/common/network/dns_impl.cc:158] Setting DNS resolution timer for 5000 milliseconds
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:23.431][000009][debug][upstream] [source/common/upstream/upstream_impl.cc:1244] async DNS resolution complete for host.docker.internal
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.565][000009][debug][upstream] [source/common/config/grpc_mux_impl.cc:48] Establishing new gRPC bidi stream for rpc StreamAggregatedResources(stream .envoy.api.v2.DiscoveryRequest) returns (stream .envoy.api.v2.DiscoveryResponse);
+[36menvoy_control_plane_1  |[0m 
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.565][000009][debug][router] [source/common/router/router.cc:270] [C0][S11013082448828433876] cluster 'xds_cluster' match for URL '/envoy.service.discovery.v2.AggregatedDiscoveryService/StreamAggregatedResources'
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.565][000009][debug][router] [source/common/router/router.cc:328] [C0][S11013082448828433876] router decoding headers:
+[36menvoy_control_plane_1  |[0m ':method', 'POST'
+[36menvoy_control_plane_1  |[0m ':path', '/envoy.service.discovery.v2.AggregatedDiscoveryService/StreamAggregatedResources'
+[36menvoy_control_plane_1  |[0m ':authority', 'xds_cluster'
+[36menvoy_control_plane_1  |[0m ':scheme', 'http'
+[36menvoy_control_plane_1  |[0m 'te', 'trailers'
+[36menvoy_control_plane_1  |[0m 'content-type', 'application/grpc'
+[36menvoy_control_plane_1  |[0m 'x-envoy-internal', 'true'
+[36menvoy_control_plane_1  |[0m 'x-forwarded-for', '172.18.0.2'
+[36menvoy_control_plane_1  |[0m 
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.565][000009][debug][client] [source/common/http/codec_client.cc:26] [C4] connecting
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.565][000009][debug][connection] [source/common/network/connection_impl.cc:634] [C4] connecting to 192.168.65.2:18000
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.566][000009][debug][connection] [source/common/network/connection_impl.cc:643] [C4] connection in progress
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.566][000009][debug][http2] [source/common/http/http2/codec_impl.cc:721] [C4] setting stream-level initial window size to 268435456
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.566][000009][debug][http2] [source/common/http/http2/codec_impl.cc:743] [C4] updating connection-level initial window size to 268435456
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.566][000009][debug][pool] [source/common/http/conn_pool_base.cc:20] queueing request due to no available connections
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.567][000009][debug][connection] [source/common/network/connection_impl.cc:516] [C4] connected
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.567][000009][debug][client] [source/common/http/codec_client.cc:64] [C4] connected
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.567][000009][debug][pool] [source/common/http/http2/conn_pool.cc:83] [C4] creating stream
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.567][000009][debug][router] [source/common/router/router.cc:1023] [C0][S11013082448828433876] pool ready
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.580][000009][debug][router] [source/common/router/router.cc:615] [C0][S11013082448828433876] upstream headers complete: end_stream=false
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.580][000009][debug][http] [source/common/http/async_client_impl.cc:93] async http request response headers (end_stream=false):
+[36menvoy_control_plane_1  |[0m ':status', '200'
+[36menvoy_control_plane_1  |[0m 'content-type', 'application/grpc'
+[36menvoy_control_plane_1  |[0m 
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.580][000009][debug][upstream] [source/common/config/grpc_mux_impl.cc:193] Received gRPC message for type.googleapis.com/envoy.api.v2.Cluster at version 1
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.580][000009][debug][upstream] [source/common/config/grpc_mux_impl.cc:160] Pausing discovery requests for type.googleapis.com/envoy.api.v2.ClusterLoadAssignment
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.582][000009][info][upstream] [source/common/upstream/cluster_manager_impl.cc:495] add/update cluster service_bbc during init
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.582][000009][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:533] adding TLS cluster service_bbc
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.582][000009][debug][upstream] [source/common/upstream/logical_dns_cluster.cc:80] starting async DNS resolution for www.bbc.com
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.582][000009][debug][upstream] [source/common/network/dns_impl.cc:158] Setting DNS resolution timer for 5000 milliseconds
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.582][000009][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:63] cm init: adding: cluster=service_bbc primary=1 secondary=0
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.582][000009][debug][upstream] [source/common/upstream/cds_api_impl.cc:68] cds: add/update cluster 'service_bbc'
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.582][000009][debug][upstream] [source/common/config/grpc_mux_impl.cc:168] Resuming discovery requests for type.googleapis.com/envoy.api.v2.ClusterLoadAssignment
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.582][000009][debug][config] [bazel-out/k8-opt/bin/source/common/config/_virtual_includes/grpc_mux_subscription_lib/common/config/grpc_mux_subscription_impl.h:60] gRPC config for type.googleapis.com/envoy.api.v2.Cluster accepted with 1 resources: [name: "service_bbc"
+[36menvoy_control_plane_1  |[0m type: LOGICAL_DNS
+[36menvoy_control_plane_1  |[0m connect_timeout {
+[36menvoy_control_plane_1  |[0m   seconds: 2
+[36menvoy_control_plane_1  |[0m }
+[36menvoy_control_plane_1  |[0m hosts {
+[36menvoy_control_plane_1  |[0m   socket_address {
+[36menvoy_control_plane_1  |[0m     address: "www.bbc.com"
+[36menvoy_control_plane_1  |[0m     port_value: 443
+[36menvoy_control_plane_1  |[0m   }
+[36menvoy_control_plane_1  |[0m }
+[36menvoy_control_plane_1  |[0m tls_context {
+[36menvoy_control_plane_1  |[0m   sni: "www.bbc.com"
+[36menvoy_control_plane_1  |[0m }
+[36menvoy_control_plane_1  |[0m dns_lookup_family: V4_ONLY
+[36menvoy_control_plane_1  |[0m ]
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.609][000009][debug][upstream] [source/common/upstream/logical_dns_cluster.cc:88] async DNS resolution complete for www.bbc.com
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.609][000009][debug][upstream] [source/common/upstream/upstream_impl.cc:634] initializing secondary cluster service_bbc completed
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.609][000009][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:958] membership update for TLS cluster service_bbc added 1 removed 0
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.609][000009][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:91] cm init: init complete: cluster=service_bbc primary=0 secondary=0
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.609][000009][info][upstream] [source/common/upstream/cluster_manager_impl.cc:136] cm init: all clusters initialized
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.609][000009][debug][upstream] [source/common/config/grpc_mux_impl.cc:160] Pausing discovery requests for type.googleapis.com/envoy.api.v2.RouteConfiguration
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.609][000009][info][main] [source/server/server.cc:435] all clusters initialized. initializing init manager
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.610][000009][debug][upstream] [source/common/config/grpc_mux_impl.cc:137] gRPC mux subscribe for type.googleapis.com/envoy.api.v2.Listener
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.610][000009][debug][upstream] [source/common/config/grpc_mux_impl.cc:168] Resuming discovery requests for type.googleapis.com/envoy.api.v2.RouteConfiguration
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.612][000009][debug][upstream] [source/common/config/grpc_mux_impl.cc:193] Received gRPC message for type.googleapis.com/envoy.api.v2.Listener at version 1
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.612][000009][debug][upstream] [source/common/config/grpc_mux_impl.cc:160] Pausing discovery requests for type.googleapis.com/envoy.api.v2.RouteConfiguration
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.613][000009][debug][config] [source/server/listener_manager_impl.cc:691] begin add/update listener: name=listener_0 hash=14547579183357818732
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.613][000009][debug][config] [source/server/listener_manager_impl.cc:39]   filter #0:
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.613][000009][debug][config] [source/server/listener_manager_impl.cc:40]     name: envoy.http_connection_manager
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.613][000009][debug][config] [source/server/listener_manager_impl.cc:43]   config: {"route_config":{"virtual_hosts":[{"domains":["*"],"routes":[{"route":{"prefix_rewrite":"/robots.txt","host_rewrite":"www.bbc.com","cluster":"service_bbc"},"match":{"regex":"/*"}}],"name":"local_service"}],"name":"local_route"},"stat_prefix":"ingress_http","http_filters":[{"name":"envoy.router"}]}
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.615][000009][debug][config] [source/extensions/filters/network/http_connection_manager/config.cc:312]     http filter #0
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.615][000009][debug][config] [source/extensions/filters/network/http_connection_manager/config.cc:313]       name: envoy.router
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.615][000009][debug][config] [source/extensions/filters/network/http_connection_manager/config.cc:317]     config: {}
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.616][000009][debug][config] [source/server/listener_manager_impl.cc:578] add active listener: name=listener_0, hash=14547579183357818732, address=127.0.0.1:10000
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.616][000009][info][upstream] [source/server/lds_api.cc:80] lds: add/update listener 'listener_0'
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.616][000009][info][config] [source/server/listener_manager_impl.cc:961] all dependencies initialized. starting workers
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.616][000009][debug][upstream] [source/common/config/grpc_mux_impl.cc:168] Resuming discovery requests for type.googleapis.com/envoy.api.v2.RouteConfiguration
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.616][000015][debug][main] [source/server/worker_impl.cc:99] worker entering dispatch loop
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.617][000015][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:824] adding TLS initial cluster service_bbc
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.617][000015][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:824] adding TLS initial cluster xds_cluster
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.617][000015][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:958] membership update for TLS cluster xds_cluster added 1 removed 0
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.617][000015][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:531] updating TLS cluster service_bbc
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.617][000015][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:958] membership update for TLS cluster service_bbc added 1 removed 0
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.617][000009][debug][config] [bazel-out/k8-opt/bin/source/common/config/_virtual_includes/grpc_mux_subscription_lib/common/config/grpc_mux_subscription_impl.h:60] gRPC config for type.googleapis.com/envoy.api.v2.Listener accepted with 1 resources: [name: "listener_0"
+[36menvoy_control_plane_1  |[0m address {
+[36menvoy_control_plane_1  |[0m   socket_address {
+[36menvoy_control_plane_1  |[0m     address: "127.0.0.1"
+[36menvoy_control_plane_1  |[0m     port_value: 10000
+[36menvoy_control_plane_1  |[0m   }
+[36menvoy_control_plane_1  |[0m }
+[36menvoy_control_plane_1  |[0m filter_chains {
+[36menvoy_control_plane_1  |[0m   filters {
+[36menvoy_control_plane_1  |[0m     name: "envoy.http_connection_manager"
+[36menvoy_control_plane_1  |[0m     config {
+[36menvoy_control_plane_1  |[0m       fields {
+[36menvoy_control_plane_1  |[0m         key: "http_filters"
+[36menvoy_control_plane_1  |[0m         value {
+[36menvoy_control_plane_1  |[0m           list_value {
+[36menvoy_control_plane_1  |[0m             values {
+[36menvoy_control_plane_1  |[0m               struct_value {
+[36menvoy_control_plane_1  |[0m                 fields {
+[36menvoy_control_plane_1  |[0m                   key: "name"
+[36menvoy_control_plane_1  |[0m                   value {
+[36menvoy_control_plane_1  |[0m                     string_value: "envoy.router"
+[36menvoy_control_plane_1  |[0m                   }
+[36menvoy_control_plane_1  |[0m                 }
+[36menvoy_control_plane_1  |[0m               }
+[36menvoy_control_plane_1  |[0m             }
+[36menvoy_control_plane_1  |[0m           }
+[36menvoy_control_plane_1  |[0m         }
+[36menvoy_control_plane_1  |[0m       }
+[36menvoy_control_plane_1  |[0m       fields {
+[36menvoy_control_plane_1  |[0m         key: "route_config"
+[36menvoy_control_plane_1  |[0m         value {
+[36menvoy_control_plane_1  |[0m           struct_value {
+[36menvoy_control_plane_1  |[0m             fields {
+[36menvoy_control_plane_1  |[0m               key: "name"
+[36menvoy_control_plane_1  |[0m               value {
+[36menvoy_control_plane_1  |[0m                 string_value: "local_route"
+[36menvoy_control_plane_1  |[0m               }
+[36menvoy_control_plane_1  |[0m             }
+[36menvoy_control_plane_1  |[0m             fields {
+[36menvoy_control_plane_1  |[0m               key: "virtual_hosts"
+[36menvoy_control_plane_1  |[0m               value {
+[36menvoy_control_plane_1  |[0m                 list_value {
+[36menvoy_control_plane_1  |[0m                   values {
+[36menvoy_control_plane_1  |[0m                     struct_value {
+[36menvoy_control_plane_1  |[0m                       fields {
+[36menvoy_control_plane_1  |[0m                         key: "domains"
+[36menvoy_control_plane_1  |[0m                         value {
+[36menvoy_control_plane_1  |[0m                           list_value {
+[36menvoy_control_plane_1  |[0m                             values {
+[36menvoy_control_plane_1  |[0m                               string_value: "*"
+[36menvoy_control_plane_1  |[0m                             }
+[36menvoy_control_plane_1  |[0m                           }
+[36menvoy_control_plane_1  |[0m                         }
+[36menvoy_control_plane_1  |[0m                       }
+[36menvoy_control_plane_1  |[0m                       fields {
+[36menvoy_control_plane_1  |[0m                         key: "name"
+[36menvoy_control_plane_1  |[0m                         value {
+[36menvoy_control_plane_1  |[0m                           string_value: "local_service"
+[36menvoy_control_plane_1  |[0m                         }
+[36menvoy_control_plane_1  |[0m                       }
+[36menvoy_control_plane_1  |[0m                       fields {
+[36menvoy_control_plane_1  |[0m                         key: "routes"
+[36menvoy_control_plane_1  |[0m                         value {
+[36menvoy_control_plane_1  |[0m                           list_value {
+[36menvoy_control_plane_1  |[0m                             values {
+[36menvoy_control_plane_1  |[0m                               struct_value {
+[36menvoy_control_plane_1  |[0m                                 fields {
+[36menvoy_control_plane_1  |[0m                                   key: "match"
+[36menvoy_control_plane_1  |[0m                                   value {
+[36menvoy_control_plane_1  |[0m                                     struct_value {
+[36menvoy_control_plane_1  |[0m                                       fields {
+[36menvoy_control_plane_1  |[0m                                         key: "regex"
+[36menvoy_control_plane_1  |[0m                                         value {
+[36menvoy_control_plane_1  |[0m                                           string_value: "/*"
+[36menvoy_control_plane_1  |[0m                                         }
+[36menvoy_control_plane_1  |[0m                                       }
+[36menvoy_control_plane_1  |[0m                                     }
+[36menvoy_control_plane_1  |[0m                                   }
+[36menvoy_control_plane_1  |[0m                                 }
+[36menvoy_control_plane_1  |[0m                                 fields {
+[36menvoy_control_plane_1  |[0m                                   key: "route"
+[36menvoy_control_plane_1  |[0m                                   value {
+[36menvoy_control_plane_1  |[0m                                     struct_value {
+[36menvoy_control_plane_1  |[0m                                       fields {
+[36menvoy_control_plane_1  |[0m                                         key: "cluster"
+[36menvoy_control_plane_1  |[0m                                         value {
+[36menvoy_control_plane_1  |[0m                                           string_value: "service_bbc"
+[36menvoy_control_plane_1  |[0m                                         }
+[36menvoy_control_plane_1  |[0m                                       }
+[36menvoy_control_plane_1  |[0m                                       fields {
+[36menvoy_control_plane_1  |[0m                                         key: "host_rewrite"
+[36menvoy_control_plane_1  |[0m                                         value {
+[36menvoy_control_plane_1  |[0m                                           string_value: "www.bbc.com"
+[36menvoy_control_plane_1  |[0m                                         }
+[36menvoy_control_plane_1  |[0m                                       }
+[36menvoy_control_plane_1  |[0m                                       fields {
+[36menvoy_control_plane_1  |[0m                                         key: "prefix_rewrite"
+[36menvoy_control_plane_1  |[0m                                         value {
+[36menvoy_control_plane_1  |[0m                                           string_value: "/robots.txt"
+[36menvoy_control_plane_1  |[0m                                         }
+[36menvoy_control_plane_1  |[0m                                       }
+[36menvoy_control_plane_1  |[0m                                     }
+[36menvoy_control_plane_1  |[0m                                   }
+[36menvoy_control_plane_1  |[0m                                 }
+[36menvoy_control_plane_1  |[0m                               }
+[36menvoy_control_plane_1  |[0m                             }
+[36menvoy_control_plane_1  |[0m                           }
+[36menvoy_control_plane_1  |[0m                         }
+[36menvoy_control_plane_1  |[0m                       }
+[36menvoy_control_plane_1  |[0m                     }
+[36menvoy_control_plane_1  |[0m                   }
+[36menvoy_control_plane_1  |[0m                 }
+[36menvoy_control_plane_1  |[0m               }
+[36menvoy_control_plane_1  |[0m             }
+[36menvoy_control_plane_1  |[0m           }
+[36menvoy_control_plane_1  |[0m         }
+[36menvoy_control_plane_1  |[0m       }
+[36menvoy_control_plane_1  |[0m       fields {
+[36menvoy_control_plane_1  |[0m         key: "stat_prefix"
+[36menvoy_control_plane_1  |[0m         value {
+[36menvoy_control_plane_1  |[0m           string_value: "ingress_http"
+[36menvoy_control_plane_1  |[0m         }
+[36menvoy_control_plane_1  |[0m       }
+[36menvoy_control_plane_1  |[0m     }
+[36menvoy_control_plane_1  |[0m   }
+[36menvoy_control_plane_1  |[0m }
+[36menvoy_control_plane_1  |[0m ]
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.617][000016][debug][main] [source/server/worker_impl.cc:99] worker entering dispatch loop
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.617][000017][debug][main] [source/server/worker_impl.cc:99] worker entering dispatch loop
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.617][000018][debug][main] [source/server/worker_impl.cc:99] worker entering dispatch loop
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.618][000019][debug][grpc] [source/common/grpc/google_async_client_impl.cc:41] completionThread running
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.618][000016][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:824] adding TLS initial cluster service_bbc
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.619][000016][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:824] adding TLS initial cluster xds_cluster
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.619][000016][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:958] membership update for TLS cluster xds_cluster added 1 removed 0
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.619][000016][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:531] updating TLS cluster service_bbc
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.619][000017][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:824] adding TLS initial cluster service_bbc
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.619][000017][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:824] adding TLS initial cluster xds_cluster
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.619][000016][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:958] membership update for TLS cluster service_bbc added 1 removed 0
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.619][000017][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:958] membership update for TLS cluster xds_cluster added 1 removed 0
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.619][000017][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:531] updating TLS cluster service_bbc
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.619][000017][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:958] membership update for TLS cluster service_bbc added 1 removed 0
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.618][000020][debug][grpc] [source/common/grpc/google_async_client_impl.cc:41] completionThread running
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.619][000021][debug][grpc] [source/common/grpc/google_async_client_impl.cc:41] completionThread running
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.619][000018][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:824] adding TLS initial cluster service_bbc
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.619][000018][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:824] adding TLS initial cluster xds_cluster
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.619][000018][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:958] membership update for TLS cluster xds_cluster added 1 removed 0
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.619][000018][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:531] updating TLS cluster service_bbc
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.620][000018][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:958] membership update for TLS cluster service_bbc added 1 removed 0
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:26.620][000022][debug][grpc] [source/common/grpc/google_async_client_impl.cc:41] completionThread running
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:28.430][000009][debug][upstream] [source/common/upstream/upstream_impl.cc:1237] starting async DNS resolution for host.docker.internal
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:28.430][000009][debug][upstream] [source/common/network/dns_impl.cc:158] Setting DNS resolution timer for 5000 milliseconds
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:28.432][000009][debug][upstream] [source/common/network/dns_impl.cc:158] Setting DNS resolution timer for 5000 milliseconds
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:28.434][000009][debug][upstream] [source/common/upstream/upstream_impl.cc:1244] async DNS resolution complete for host.docker.internal
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:31.609][000009][debug][upstream] [source/common/upstream/logical_dns_cluster.cc:80] starting async DNS resolution for www.bbc.com
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:31.611][000009][debug][upstream] [source/common/network/dns_impl.cc:158] Setting DNS resolution timer for 5000 milliseconds
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:31.613][000009][debug][main] [source/server/server.cc:143] flushing stats
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:31.626][000009][debug][upstream] [source/common/upstream/logical_dns_cluster.cc:88] async DNS resolution complete for www.bbc.com
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:33.431][000009][debug][upstream] [source/common/upstream/upstream_impl.cc:1237] starting async DNS resolution for host.docker.internal
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:33.433][000009][debug][upstream] [source/common/network/dns_impl.cc:158] Setting DNS resolution timer for 4999 milliseconds
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:33.434][000009][debug][upstream] [source/common/network/dns_impl.cc:158] Setting DNS resolution timer for 5000 milliseconds
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:33.437][000009][debug][upstream] [source/common/upstream/upstream_impl.cc:1244] async DNS resolution complete for host.docker.internal
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:36.619][000009][debug][main] [source/server/server.cc:143] flushing stats
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:36.630][000009][debug][upstream] [source/common/upstream/logical_dns_cluster.cc:80] starting async DNS resolution for www.bbc.com
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:36.631][000009][debug][upstream] [source/common/network/dns_impl.cc:158] Setting DNS resolution timer for 5000 milliseconds
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:36.636][000009][debug][upstream] [source/common/upstream/logical_dns_cluster.cc:88] async DNS resolution complete for www.bbc.com
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:38.436][000009][debug][upstream] [source/common/upstream/upstream_impl.cc:1237] starting async DNS resolution for host.docker.internal
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:38.437][000009][debug][upstream] [source/common/network/dns_impl.cc:158] Setting DNS resolution timer for 5000 milliseconds
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:38.439][000009][debug][upstream] [source/common/network/dns_impl.cc:158] Setting DNS resolution timer for 5000 milliseconds
+[36menvoy_control_plane_1  |[0m [2019-05-13 17:36:38.441][000009][debug][upstream] [source/common/upstream/upstream_impl.cc:1244] async DNS resolution complete for host.docker.internal
